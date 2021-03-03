@@ -1,0 +1,29 @@
+<html>
+  <head>
+  </head>
+  <body>
+  </body>
+  <script type="text/javascript" src="static/js/jquery.min.js"></script>
+  <script type="text/javascript" src="static/js/custom.js"></script>
+  <script>
+    back_url = 'https://pm-back.jp.ngrok.io/';
+    front_url = 'https://pm.jp.ngrok.io/chrome_ext/frontend/src/pm_server/';
+
+    code = get_query('code');
+    state = get_query('state');
+
+    jQuery(document).ready(function() {
+      params = {'state' : state,
+                'callback': front_url + 'callback.html',
+                'code'  : code};
+      jQuery.post(back_url + 'auth', params, function(data) {
+        result = JSON.parse(data);
+        if (result['result'] == true) {
+          localStorage.setItem('pm_session', result['data']['pm_session']);
+
+          window.location = 'index.html';
+        }
+      });
+    });
+  </script>
+</html>

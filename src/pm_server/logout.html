@@ -1,0 +1,36 @@
+<html>
+  <head>
+  </head>
+  <body>
+  </body>
+  <script type="text/javascript" src="static/js/jquery.min.js"></script>
+  <script>
+    back_url = 'https://pm-back.jp.ngrok.io/';
+    front_url = 'https://pm.jp.ngrok.io/chrome_ext/frontend/src/pm_server/';
+
+    pm_session = localStorage.getItem('pm_session');
+
+    jQuery(document).ready(function() {
+      jQuery.ajax({
+        url: back_url + 'logout',
+        type: 'get',
+        data: {
+          access_token: 'XXXXXXXXXXXXXXXXXXX'
+        },
+        headers: {
+          'Authorization': 'Bearer ' + pm_session
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data['result'] == true) {
+
+          }
+        }
+      });
+
+      pm_session = localStorage.setItem('pm_session', '');
+
+      window.location = 'login.html';
+    });
+  </script>
+</html>
